@@ -1,4 +1,4 @@
-# Đồ Án: Phân Loại Ảnh X-Quang Phổi Phát Hiện Viêm Phổi Sử Dụng ResNet50 và Vision Transformer
+# Đồ Án: Phân Loại Ảnh X-Quang Phổi Sử Dụng ResNet50 và Vision Transformer
 
 ## Giới Thiệu
 
