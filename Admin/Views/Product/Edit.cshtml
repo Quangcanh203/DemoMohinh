@@ -1,0 +1,84 @@
+﻿@model ProductModel
+
+@{
+    ViewData["Title"] = "Chỉnh sửa sản phẩm";
+}
+<h4 class="text-center mt-4">Chỉnh sửa sản phẩm</h4>
+<div class="col-md-8 offset-md-2">
+    <form asp-action="Edit" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3"></div>
+
+        <div class="form-group mb-3">
+            <label for="Name" class="form-label">Tên sản phẩm</label>
+            <input asp-for="Name" class="form-control" id="Name" placeholder="Nhập tên sản phẩm" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="Price" class="form-label">Giá</label>
+            <input asp-for="Price" class="form-control" id="Price" placeholder="Nhập giá sản phẩm" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="Description" class="form-label">Mô tả</label>
+            <textarea asp-for="Description" class="form-control" id="Description" placeholder="Nhập mô tả sản phẩm"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="CategoryId" class="form-label">Danh mục</label>
+            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Category" id="CategoryId">
+                <option>--Chọn danh mục--</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="BrandId" class="form-label">Thương hiệu</label>
+            <select asp-for="BrandId" class="form-control" asp-items="ViewBag.Brands" id="BrandId">
+                <option>--Chọn thương hiệu--</option>
+            </select>
+            <span asp-validation-for="BrandId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="ImageUpload" class="form-label">Hình ảnh</label>
+            <input asp-for="ImageUpload" type="file" class="form-control" id="ImageUpload" />
+            <span asp-validation-for="ImageUpload" class="text-danger"></span>
+            <img src="~/media/products/@Model.Image" id="imgpreview" class="pt-2 img-thumbnail" width="120" />
+        </div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-block">Cập nhật</button>
+        </div>
+    </form>
+
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-link">Quay lại danh sách sản phẩm</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        $("#ImageUpload").change(function () {
+            readURL(this);
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgpreview').attr('src', e.target.result).show();
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        CKEDITOR.replace('Description');
+    </script>
+}

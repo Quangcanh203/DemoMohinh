@@ -1,0 +1,47 @@
+﻿@model CategoryModel
+
+@{
+    ViewData["Title"] = "Chỉnh sửa danh mục";
+}
+
+<h4 class="text-center mt-4">Chỉnh sửa danh mục</h4>
+<div class="col-md-8 offset-md-2">
+    <form asp-action="Edit" method="post" class="p-4 border rounded shadow-sm">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-group mb-3">
+            <label for="Name">Tên danh mục</label>
+            <input asp-for="Name" class="form-control" id="Name" placeholder="Nhập tên danh mục" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="Description">Mô tả</label>
+            <textarea asp-for="Description" class="form-control" id="Description" placeholder="Nhập mô tả danh mục"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="Status">Trạng thái</label>
+            <select asp-for="Status" class="form-control" id="Status">
+                <option value="1">Hiển thị</option>
+                <option value="0">Ẩn</option>
+            </select>
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Cập nhật</button>
+        </div>
+    </form>
+
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-link">Quay lại danh sách danh mục</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
